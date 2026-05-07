@@ -8,6 +8,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static utils.PriceUtils.priceToInt;
 
 public class ProductPage {
 
@@ -20,7 +21,7 @@ public class ProductPage {
 
     public void openDeviceBySlug(String slug, String deviceName) {
 
-        $("a[href*='" + slug + "']")
+        $("a[href*='" + slug.replace("'", "\\'") + "']")
                 .shouldBe(visible, Duration.ofSeconds(15))
                 .shouldBe(enabled)
                 .scrollIntoView(true)
@@ -29,7 +30,6 @@ public class ProductPage {
         $("h1")
                 .shouldBe(visible, Duration.ofSeconds(15))
                 .shouldHave(text(deviceName));
-
     }
 
     public void theProductPageForDeviceIsDisplayed(String deviceName) {
@@ -37,7 +37,6 @@ public class ProductPage {
         $("h1[data-qa='PRD_ProductName']")
                 .shouldBe(visible)
                 .shouldHave(text(deviceName));
-
     }
 
     public int getProductPrice() {
@@ -50,16 +49,7 @@ public class ProductPage {
         return priceToInt(priceText);
     }
 
-    private int priceToInt(String priceText) {
-        return Integer.parseInt(
-                priceText
-                        .replace("zł", "")
-                        .replace(" ", "")
-                        .trim()
-        );
-    }
-
-    public void addToCartBySlug(String slug) {
+    public void addToCart() {
 
         SelenideElement option =
                 $$("button")

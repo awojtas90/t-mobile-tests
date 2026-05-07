@@ -19,7 +19,7 @@ public class HomePage {
         Selenide.open("https://www.t-mobile.pl/");
 
         $(byText("Akceptuję wszystkie"))
-                .shouldBe(visible, Duration.ofSeconds(10))
+                .shouldBe(visible, Duration.ofSeconds(5))
                 .click();
 
         $(".didomi-popup-backdrop").should(disappear);
@@ -27,12 +27,10 @@ public class HomePage {
 
     public void verifyHomepageVisible() {
         $("body")
-                .shouldBe(visible, Duration.ofSeconds(10));
-
+                .shouldBe(visible, Duration.ofSeconds(5));
     }
 
     public void openShopMenu() {
-        $("#didomi-popup").shouldNotBe(visible);
 
         $("header[aria-label='Menu główne']")
                 .find(withText("Sklep"))
@@ -45,7 +43,6 @@ public class HomePage {
         $(".ODSGlobalHeaderMegaMenu-Container")
                 .shouldBe(visible, Duration.ofSeconds(10));
     }
-
 
     public void returnToHomepage() {
         $("img[alt='T-Mobile - przejdź na stronę główną']")
