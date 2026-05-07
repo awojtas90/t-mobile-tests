@@ -19,7 +19,7 @@ public class HomePage {
         Selenide.open("https://www.t-mobile.pl/");
 
         $(byText("Akceptuję wszystkie"))
-                .shouldBe(visible, Duration.ofSeconds(5))
+                .shouldBe(visible, Duration.ofSeconds(10))
                 .click();
 
         $(".didomi-popup-backdrop").should(disappear);
